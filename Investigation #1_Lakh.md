@@ -19,18 +19,27 @@ The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, 
 ### Step One: Finding the Non-Compliant Deployment - An Improper Naming Convention
 The first step was to discover the offending deployment. Upon navigating through the Azure Portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only one that did not follow the recommended Microsoft RG naming convention. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
 
-### Step Two: Confirming the Culprit - The Flag in the Tags
+### Step Two: Establishing a Suspect - The Flag in the Tags
 
-The next step was to investigate the suspect resource group. In it was only one resource. Upon expanding its Tags blade, the 'intern-tag' was discovered.
+The next step was to investigate the misnamed resource group. In it was only one resource. Upon expanding its Tags blade, the 'intern-tag' was discovered.
 IMAGE
-The intern was previously instructed to use this identifying tag whenever they documented resources. This confirms the suspicions that the intern was the one associated with this suspect deployment.
+The intern was previously instructed to use this identifying tag whenever they documented resources. This certainly establishes the intern as a prime suspect.
 
-### Step Three: Establishing a Timeline of Events - Following the Trail
+### Step Three: Confirming the Culprit - Establishing a Timeline of Events
 
-As the intern is being implicated as the culprit behind this mistake, let us look for timestamps to create a clear picture of when this happened. We can then compare this to our incident logs, to confirm without a shadow of a doubt that the intern made this deployment. Thus the next step is to examine the ARM deployment. In the respective blades is found information such as the timestamp below.
+The intern is being implicated as the culprit behind this mistake. Timestamps can help create a clearer picture of when this happened.Thus the next step is to examine the ARM deployment. In the respective blades is found information such as the timestamp below.
+IMAGE
+Furthermore, it is revealed that the deployment was also misnamed. 
+IMAGE
+Through the flag discovery and the timestamps pointing to them, the conclusion can be made that the intern was indeed the culprit.
 
-Furthermore, it is revealed that the deployment 
+### Step Four: Establishing the Why - Governance Mistakes
 
+It is now necessary to understand why this deployment was allowed to go through at all. Policy should prevent such things from happening. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
+IMAGE
+Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'audit'. And therein is the rub. 
+IMAGE
+Thus, it can be assumed that a governance misconfiguration error has occurred. 
 
 ## What broke / what surprised me
 The most credible section in the document. Dead ends, wrong guesses, the thing that took an hour. Employers know real work is messy. This section separates you from certificate collectors.
