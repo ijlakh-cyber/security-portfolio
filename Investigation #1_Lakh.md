@@ -40,20 +40,18 @@ Upon inspecting its parameters, it is revealed that the non-compliant effect is 
 IMAGE
 Azure Policy's Audit effect identifies and records non-compliant resources without blocking their creation, which is why this deployment went through.
 
-## What broke / what surprised me
-It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning Azure Policies and resource locks (i.e. governance) must therefore be an extremely meticulous and painstaking endeavour. 
-
 ## Summary of Findings
 1. Naming convention violations: An improperly named resource group was provisioned outside the established organisational naming standard. The deployment itself was also misnamed.
 2. Governance enforcement failure: The assigned naming convention policy was configured with the 'Audit' effect, allowing non-compliant resources to be created.
 3. Insufficient deployment oversight: The deployment was performed using temporary Contributor access, while the existing governance controls were insufficient to prevent non-compliant provisioning.
 
 ## Recommendations
-
 It is clear that in this situation, monitoring this violation is not sufficient. Thus, it is advisable to change the policy effect to Deny to simply prevent non-compliant deployments that violate the naming standard from going through.  Furthermore, temporary Contributor access should be reviewed and restricted according to the principle of least privilege. Access should also be revoked once the intended task has been completed.  
-
 
 ## What I learned
 - I learned that Azure Policy effects determine whether non-compliant resources are merely identified or actively prevented from being deployed. The distinction between Audit and Deny is particularly important when implementing preventative governance controls.
 - I gained practical experience examining Azure Resource Groups, resource tags, and ARM deployment history to investigate unexpected resource provisioning. 
 - In a future investigation, I would correlate deployment history with Activity Logs earlier in the process to establish a more reliable timeline of events and to identify the identity responsible for each operation.
+
+## What surprised me
+It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning Azure Policies and resource locks (i.e. governance) must therefore be an extremely meticulous and painstaking endeavour. 
