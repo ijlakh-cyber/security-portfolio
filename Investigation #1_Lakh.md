@@ -6,7 +6,7 @@ A junior intern was granted temporary Contributor access within a live, multi-us
 ## Environment
 Platform: Microsoft Azure    
 Cloud environment: Live multi-user Azure training tenant    
-Services: Azure Policy, Resource Groups, Azure Resource Manager (ARM)   
+Services: Resource Groups, Azure Resource Manager (ARM), Azure Policy
 Tools: Azure Portal    
 Access level: Reader (read-only)    
 Scope: Assigned training subscription and associated resource groups
@@ -17,8 +17,13 @@ Screenshots included in this report have been selectively censored to remove sen
 ## Investigation Procedure
 The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
 ### Step One: Finding the Culprit - An Improper Naming Convention
-The first step was to discover the offending deployment. One such deployment was immediately suspect, as it was the only one that did not follow the recommended Microsoft RG naming convention. 
-2. 
+The first step was to discover the offending deployment. Upon navigating through the Azure Portal into the Resource Manager and then accessing the list of Resource Groups, one such deployment became immediately suspect, as it was only one that did not follow the recommended Microsoft RG naming convention. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
+
+### Step Two: Confirming the Culprit - The Flag in the Tags
+
+The next step was to investigate the suspect deployment. Upon expanding its Tags blade, the 'intern-tag' was discovered.
+IMAGE
+The intern was previously instructed to use this identifying tag whenever they documented resources. This confirms our suspicions that the intern was the one associated with this suspect deployment.
 
 ## What broke / what surprised me
 The most credible section in the document. Dead ends, wrong guesses, the thing that took an hour. Employers know real work is messy. This section separates you from certificate collectors.
