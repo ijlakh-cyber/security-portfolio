@@ -15,27 +15,35 @@ Scope: Assigned training subscription and associated resource groups
 Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
 ## Investigation Procedure
-### Step One: Finding the Non-Compliant Deployment - An Improper Naming Convention
+### Step One: Finding the Non-Compliant Deployment
 The first step was to discover the offending deployment. Upon navigating through the Azure portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only the one that did not follow the organisation's established naming convention, which in this case happens to follow Microsoft's recommended naming conventions. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
 
-### Step Two: Establishing a Suspect - The Flag in the Tags
+### Step Two: Establishing a Suspect
 
 The next step was to investigate the misnamed resource group. In it was one resource. Upon expanding its Tags blade, the 'intern-flag' was discovered.
-IMAGE
+
+![lab1-01](Screenshots/Lab1/lab1-01.png)
+
 The intern was previously instructed to use this identifying tag whenever they documented resources. This certainly establishes the intern as a prime suspect.
 
-### Step Three: Following the Trail - Establishing a Timeline of Events
+### Step Three: Following the Trail
 
 The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment names and timestamps, which can also provide additional context linking the deployment to the earlier findings. The deployment history revealed an unusually named deployment, the timing of which corresponded with the intern's experiment.  
-IMAGE 
+
+![lab1-02](Screenshots/Lab1/lab1-02.png) 
+
 By correlating the deployment record with the identifying resource tag, the investigation established a consistent timeline of activity associated with the intern's test environment.
 
-### Step Four: Establishing the Why - Governance Mistakes
+### Step Four: Establishing the Why
 
 It is now necessary to understand why this deployment was allowed to go through at all. This particular policy was intended to enforce naming conventions. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
-IMAGE
-Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'Audit'. And therein is the rub. 
-IMAGE
+
+![lab1-03](Screenshots/Lab1/lab1-03.png)
+
+Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'Audit'. And therein lies the rub. 
+
+![lab1-04](Screenshots/Lab1/lab1-04.png)
+
 Azure Policy's Audit effect identifies and records non-compliant resources without blocking their creation, which is why this deployment went through.
 
 ## Summary of Findings
