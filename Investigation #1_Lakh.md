@@ -1,10 +1,15 @@
 # Investigating Azure Policy Misconfiguration and Governance Failures
 
 ## Scenario
-A junior intern was granted temporary Contributor access to the Mad Hat Labs Azure subscription to provision a test environment. An investigation was initiated following the discovery of a non-compliant deployment to determine what resources were created, whether organisational naming and tagging standards were followed, and why Azure Policy failed to prevent the deployment.
+A junior intern was granted temporary Contributor access within a live, multi-user Azure training tenant to deploy a test environment. Following the discovery of a non-compliant deployment, an investigation was initiated to assess resource configuration, identify deviations from organisational naming and tagging standards, and determine why Azure Policy enforcement failed to prevent such a deployment.
 
 ## Environment
-One list: platform, services, tools, access level. Honest framing: "live multi-user Azure training tenant, Reader access."
+Platform: Microsoft Azure    
+Cloud environment: Live multi-user Azure training tenant    
+Services: Azure Resource Manager (ARM), Azure Policy, Resource Groups    
+Tools: Azure Portal    
+Access level: Reader (read-only)    
+Scope: Assigned training subscription and associated resource groups
 
 ## Investigation
 The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
