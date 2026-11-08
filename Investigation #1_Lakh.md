@@ -6,7 +6,7 @@ A junior intern was granted temporary Contributor access within a live, multi-us
 ## Environment
 Platform: Microsoft Azure    
 Cloud environment: Live multi-user Azure training tenant    
-Services: Resource Groups, Azure Resource Manager (ARM), Azure Policy
+Services: Resource Groups, Azure Resource Manager (ARM) Deployments, Azure Policy
 Tools: Azure Portal    
 Access level: Reader (read-only)    
 Scope: Assigned training subscription and associated resource groups
@@ -17,29 +17,29 @@ Screenshots included in this report have been selectively censored to remove sen
 ## Investigation Procedure
 The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
 ### Step One: Finding the Non-Compliant Deployment - An Improper Naming Convention
-The first step was to discover the offending deployment. Upon navigating through the Azure Portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only one that did not follow the recommended Microsoft RG naming convention. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
+The first step was to discover the offending deployment. Upon navigating through the Azure Portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only one that did not follow the organisation's established naming convention, which in this case happens to be Microsoft's recommended naming scheme. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
 
 ### Step Two: Establishing a Suspect - The Flag in the Tags
 
-The next step was to investigate the misnamed resource group. In it was only one resource. Upon expanding its Tags blade, the 'intern-tag' was discovered.
+The next step was to investigate the misnamed resource group. In it was only one resource. Upon expanding its Tags blade, the 'intern-flag' was discovered.
 IMAGE
 The intern was previously instructed to use this identifying tag whenever they documented resources. This certainly establishes the intern as a prime suspect.
 
-### Step Three: Confirming the Culprit - Establishing a Timeline of Events
+### Step Three: Following the Trail - Establishing a Timeline of Events
 
-The intern is being implicated as the culprit behind this mistake. Timestamps can help create a clearer picture of when this happened.Thus the next step is to examine the ARM deployment. In the respective blades is found information such as the timestamp below.
+The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment history and timestamps. The deployment history revealed an unusually named deployment that corresponded with the intern's experiment.  
+IMAGE 
+The timestamp can also provide additional context linking the deployment to the earlier findings.
 IMAGE
-Furthermore, it is revealed that the deployment was also misnamed. 
-IMAGE
-Through the flag discovery and the timestamps pointing to them, the conclusion can be made that the intern was indeed the culprit.
+By correlating the deployment record with the identifying resource tag, the investigation established a consistent timeline of activity associated with the intern's test environment.
 
 ### Step Four: Establishing the Why - Governance Mistakes
 
-It is now necessary to understand why this deployment was allowed to go through at all. Policy should prevent such things from happening. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
+It is now necessary to understand why this deployment was allowed to go through at all. Policy should enforce naming conventions. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
 IMAGE
 Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'audit'. And therein is the rub. 
 IMAGE
-Thus, it can be assumed that a governance misconfiguration error has occurred. 
+Azure Policy's Audit effect identifies and records non-compliant resources without blocking their creation, which is why this deployment went through.
 
 ## What broke / what surprised me
 It is fascinating that an 'audit' policy, despite flagging the mistake, is not a sufficient control to stop this seemingly benign yet potentially costly incident. The importance of correctly assigning azure policies and resource locks must therefore be an extremely meticulous and painstaking endeavour. 
