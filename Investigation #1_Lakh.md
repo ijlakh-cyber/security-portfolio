@@ -37,15 +37,24 @@ By correlating the deployment record with the identifying resource tag, the inve
 
 It is now necessary to understand why this deployment was allowed to go through at all. Policy should enforce naming conventions. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
 IMAGE
-Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'audit'. And therein is the rub. 
+Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'Audit'. And therein is the rub. 
 IMAGE
 Azure Policy's Audit effect identifies and records non-compliant resources without blocking their creation, which is why this deployment went through.
 
 ## What broke / what surprised me
-It is fascinating that an 'audit' policy, despite flagging the mistake, is not a sufficient control to stop this seemingly benign yet potentially costly incident. The importance of correctly assigning azure policies and resource locks must therefore be an extremely meticulous and painstaking endeavour. 
+It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning azure policies and resource locks must therefore be an extremely meticulous and painstaking endeavour. 
 
-## Findings and recommendations
-What you determined, plus 2 or 3 recommendations as if you were reporting to the resource owner.
+## Summary of Findings
+1. Naming convention violations: An improperly named resource group was provisioned outside the established organisational naming standard. The deployment itself was also misnamed.
+2. Governance enforcement failure: The assigned naming convention policy was configured with the 'Audit' effect, allowing non-compliant resources to be created.
+3. Insufficient deployment oversight: The deployment was performed using temporary Contributor access without sufficient preventative governance controls to ensure compliance.
+
+## Recommendations
+
+It is clear that in this situation, monitoring this violation is not sufficient. Thus it is advisable to change the policy effect to 'Deny' to simply prevent non-compliant deployments that violate the naming standard going through.
+
 
 ## What I learned
-3 to 5 bullets. At least one technical, one "what I'd do differently."
+- I learned that Azure Policy effects determine whether non-compliant resources are merely identified or actively prevented from being deployed. The distinction between Audit and Deny is particularly important when implementing preventative governance controls.
+- I gained practical experience examining Azure Resource Groups, resource tags, and ARM deployment history to investigate unexpected resource provisioning. 
+- In a future investigation, I would correlate deployment history with Activity Logs earlier in the process to establish a more reliable timeline of events and to identify the identity responsible for each operation.
