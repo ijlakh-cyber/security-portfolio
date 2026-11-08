@@ -15,19 +15,18 @@ Scope: Assigned training subscription and associated resource groups
 Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
 ## Investigation Procedure
-The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
 ### Step One: Finding the Non-Compliant Deployment - An Improper Naming Convention
-The first step was to discover the offending deployment. Upon navigating through the Azure Portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only one that did not follow the organisation's established naming convention, which in this case happens to be Microsoft's recommended naming scheme. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
+The first step was to discover the offending deployment. Upon navigating through the Azure portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only the one that did not follow the organisation's established naming convention, which in this case happens to follow Microsoft's recommended naming conventions. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
 
 ### Step Two: Establishing a Suspect - The Flag in the Tags
 
-The next step was to investigate the misnamed resource group. In it was only one resource. Upon expanding its Tags blade, the 'intern-flag' was discovered.
+The next step was to investigate the misnamed resource group. In it was one resource. Upon expanding its Tags blade, the 'intern-flag' was discovered.
 IMAGE
 The intern was previously instructed to use this identifying tag whenever they documented resources. This certainly establishes the intern as a prime suspect.
 
 ### Step Three: Following the Trail - Establishing a Timeline of Events
 
-The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment history and timestamps. The deployment history revealed an unusually named deployment that corresponded with the intern's experiment.  
+The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment names and timestamps. The deployment history revealed an unusually named deployment that corresponded with the intern's experiment.  
 IMAGE 
 The timestamp can also provide additional context linking the deployment to the earlier findings.
 IMAGE
@@ -35,23 +34,23 @@ By correlating the deployment record with the identifying resource tag, the inve
 
 ### Step Four: Establishing the Why - Governance Mistakes
 
-It is now necessary to understand why this deployment was allowed to go through at all. Policy should enforce naming conventions. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
+It is now necessary to understand why this deployment was allowed to go through at all. This particular policy was intended to enforce naming conventions. Upon analysis of the policies blade, it is confirmed that this resource is non-compliant. 
 IMAGE
 Upon inspecting its parameters, it is revealed that the non-compliant effect is set to 'Audit'. And therein is the rub. 
 IMAGE
 Azure Policy's Audit effect identifies and records non-compliant resources without blocking their creation, which is why this deployment went through.
 
 ## What broke / what surprised me
-It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning azure policies and resource locks must therefore be an extremely meticulous and painstaking endeavour. 
+It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning Azure Policies and resource locks (i.e. governance) must therefore be an extremely meticulous and painstaking endeavour. 
 
 ## Summary of Findings
 1. Naming convention violations: An improperly named resource group was provisioned outside the established organisational naming standard. The deployment itself was also misnamed.
 2. Governance enforcement failure: The assigned naming convention policy was configured with the 'Audit' effect, allowing non-compliant resources to be created.
-3. Insufficient deployment oversight: The deployment was performed using temporary Contributor access without sufficient preventative governance controls to ensure compliance.
+3. Insufficient deployment oversight: The deployment was performed using temporary Contributor access, while the existing governance controls were insufficient to prevent non-compliant provisioning.
 
 ## Recommendations
 
-It is clear that in this situation, monitoring this violation is not sufficient. Thus it is advisable to change the policy effect to 'Deny' to simply prevent non-compliant deployments that violate the naming standard going through.
+It is clear that in this situation, monitoring this violation is not sufficient. Thus, it is advisable to change the policy effect to Deny to simply prevent non-compliant deployments that violate the naming standard from going through.  Furthermore, temporary Contributor access should be reviewed and restricted according to the principle of least privilege. Access should also be revoked once the intended task has been completed.  
 
 
 ## What I learned
