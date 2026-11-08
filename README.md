@@ -1,5 +1,3 @@
-# security-portfolio
-
 # Security Portfolio: [Isaac Lakh]
 
 Documented cloud security investigations, built in a live Azure tenant
