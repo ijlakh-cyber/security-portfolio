@@ -42,7 +42,7 @@ IMAGE
 Thus, it can be assumed that a governance misconfiguration error has occurred. 
 
 ## What broke / what surprised me
-The most credible section in the document. Dead ends, wrong guesses, the thing that took an hour. Employers know real work is messy. This section separates you from certificate collectors.
+It is fascinating that an 'audit' policy, despite flagging the mistake, is not a sufficient control to stop this seemingly benign yet potentially costly incident. The importance of correctly assigning azure policies and resource locks must therefore be an extremely meticulous and painstaking endeavour. 
 
 ## Findings and recommendations
 What you determined, plus 2 or 3 recommendations as if you were reporting to the resource owner.
