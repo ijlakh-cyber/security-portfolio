@@ -10,7 +10,7 @@ Contact: ij.sec@protonmail.com · linkedin.com/in/isaac-lakh-236372178
 ## Investigations
 | # | Title | Focus | Write-up |
 |---|-------|-------|----------|
-| 1 | Operation Dead Deploy | Governance forensics, deployment audit trail | [Investgation1](Investigation1_Lakh.md) |
+| 1 | Operation Dead Deploy | Governance forensics, deployment audit trail | [Investigation1](Investigation1_Lakh.md) |
 | 2 | The Stolen Identity | App registration attack kill chain (Entra ID) | coming, week 2 |
 | 3 | Privilege Audit | RBAC and least privilege | coming, week 3 |
 | 4 | Spin Up and Lock Down | Compute attack surface | coming, week 4 |
