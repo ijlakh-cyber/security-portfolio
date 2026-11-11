@@ -1,5 +1,5 @@
-# <strong> Dead Deploy </strong>
-Investigating Azure Policy Misconfiguration and Governance Failures
+# <strong>Dead Deploy </strong>
+# Investigating Azure Policy Misconfiguration and Governance Failures
 
 ## Scenario
 A junior intern was granted temporary Contributor access within a live, multi-user Azure training tenant to deploy a test environment. Following the discovery of a non-compliant deployment, an investigation was initiated to assess resource configuration, identify deviations from organisational naming and tagging standards, and determine why Azure Policy enforcement failed to prevent such a deployment.
