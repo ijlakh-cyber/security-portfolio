@@ -18,17 +18,17 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ## Investigation Procedure
 ### Step One: Entry
-The employee interacted with a fake login page. The employee, believing the integrity of the login portal, also fulfilled MFA. The attacker stole the MFA-satisfied session token, and used it to bypass the active Conditional Access policies. In other words, the attacker has taken control of an employee account. Under the guise of a legitimate employee, it is much harder to detect suspicious activity, perhaps somewhat explaining the failure of monitoring systems in place. Disastrously, the principle of least privilege had been neglected, leaving an employee account as the owner of a legacy application for which it had no apparent need. The power of an owner account should never be taken for granted.   
+The employee interacted with a fake login page. The employee, believing the integrity of the login portal, also fulfilled MFA. The attacker stole the MFA-satisfied session token, and used it to bypass the active Conditional Access policies. In other words, the attacker has taken control of an employee account. Under the guise of a legitimate employee, it is much harder to detect suspicious activity, perhaps somewhat explaining the failure of monitoring systems in place. Disastrously, the principle of least privilege had been neglected, leaving an employee account as the Owner of a legacy application for which it had no apparent need. The power of an Owner account should never be taken for granted.   
 
 ### Step Two: Escalation
-By itself a standard account would not have much power in this scenario. However the problem is that the legacy application's service principal does. Through poor access control management, this standard employee account inadvertently has owner account power over this legacy application. If the attacker can assume control of the service principal, they will obtain the permissions of the service principal, which is (in this instance) far more powerful than the permissions of a standard account. 
+By itself a standard account would not have much power in this scenario. However the problem is that the legacy application's service principal does. Through poor access control management, this standard employee account inadvertently has Owner account privileges over this legacy application. If the attacker can assume control of the service principal, they will obtain the permissions of the service principal, which is (in this instance) far more powerful than the permissions of a standard account. 
 
-To this end, the attacker modified the certificates and secrets by leveraging their owner privileges. This enabled them to add a new client secret to the application.  
+To this end, the attacker modified the certificates and secrets by leveraging their Owner privileges. This enabled them to add a new client secret to the application.  
 
 ![lab2-01](Screenshots/Lab2/lab2-01.png) 
 <sup><sub> **Client secret created by the attacker. Note the abnormal expiration date.** </sub></sup>
 
-The client secret is effectively the password that allows the attacker to prove they are the application. The secret doesn't grant the permissions itself, but rather allows the attacker to authenticate as the application using the client ID (like a username) and newly generated client secret (like a password). The application has an associated service principal in the tenant, which holds the application's granted permissions. By authenticating as this service principal, the attacker can exercise those permissions. In essence, the attacker has transitioned from operating under a compromised standard user identity to authenticating as a highly privileged application identity. Also note the abnormally long expiration date. Typically these secrets will exist for at most two years. This deliberate setting makes it less likely that the credential will expire naturally.
+The client secret is effectively the password that allows the attacker to prove they are the application. The secret doesn't grant the permissions itself, but rather allows the attacker to authenticate as the application using the client ID (like a username) and newly generated client secret (like a password). The application has an associated service principal in the tenant, which holds the application's granted permissions. By authenticating as this service principal, the attacker can exercise those permissions. In essence, the attacker has transitioned from operating under a compromised standard user identity to authenticating as a highly privileged application identity. Also note the abnormally long expiration date. It is common organisational policy that these secrets will exist for at most two years. This deliberate setting makes it less likely that the credential will expire naturally.
 
 So what can the attacker do with their new application identity that they couldn't with the standard user identity? That is answered by assessing the legacy application permissions. The initial brief reveals that the legacy application had Microsoft Graph application permissions with admin consent. Thus, we can conclude that the attacker inherited the ability to exercise whatever Microsoft Graph application permissions have been granted to the legacy application.
 
@@ -44,12 +44,12 @@ To this end, the attacker used the initially compromised standard employee ident
 <br> 
 
 
-However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the standard employee account). 
+However, the attacker then added the service principal of this new application to the Owners list of the legacy application (using the Owner privileges mistakenly left on the standard employee account). 
 
 ![lab2-03](Screenshots/Lab2/lab2-03.png) 
-<sup><sub> **The attacker added the new application to the owners list of the legacy application.** </sub></sup>
+<sup><sub> **The attacker added the new application to the Owners list of the legacy application.** </sub></sup>
 
-The implications of this are severe. Now the attacker can continuously mint credentials on a whim (assuming existing permissions do not change), negating the risks of losing authentication to the legacy application identity. 
+The implications of this are severe. Now the attacker can continuously mint credentials on a whim (assuming its Ownership status does not change), negating the risks of losing authentication to the legacy application identity. 
 
 ### Step Four: Persistence
 
@@ -114,6 +114,6 @@ This approval also creates what is known as an OAuth permission grant. In essenc
 
 - Revoking a credential does not necessarily end access.
 
-- Even after an employee's password is reset and their active sessions are revoked, an OAuth permission grant can remain in place until explicitly removed.
+- Standard users can register applications by default in many Entra tenants, without requiring administrative privileges.
 
 - A legitimate application can become an attacker's tool.
