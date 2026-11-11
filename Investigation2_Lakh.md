@@ -36,10 +36,19 @@ So what can the attacker do with their new application identity that they couldn
 ### Step Three: Pivoting
 Despite their new found power, the attacker has a problem. Despite its long expiration date, the client secret as it stands can simply be revoked or rotated by the security team. This means the loss of the ability to masquerade as the application identity, and lose the authentication route therein.
 
-To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants. This action by itself is not unusual. 
+To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants.
+
+![lab2-02](Screenshots/Lab2/lab2-02.png) 
+<sup><sub> **The adversary registered a new application.** </sub></sup>
+
+<br>
+<br> 
+
 
 However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the account).  
 
+![lab2-03](Screenshots/Lab2/lab2-03.png) 
+<sup><sub> **The adversary added the new application to the owners list of the legacy application.** </sub></sup>
 
 ### Step Four: Persistence
 
