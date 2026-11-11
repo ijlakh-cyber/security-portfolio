@@ -95,9 +95,28 @@ This approval also creates what is known as an OAuth permission grant. In essenc
 
 ## Recommendations
 
--Enforce the principle of Least-Privilege on all accounts. 
--Remove the attacker's client secret.
+- Enforce the principle of least privilege on all accounts.
+
+- Remove the attacker's client secret.
+
+- Remove the rogue application and undo everything it achieved, such as removing its service principal from the Owner list on the legacy application.
+
+- Explicitly revoke the rogue application's OAuth permission grants.
+
+- Restrict application registration by standard users if appropriate.
 
 ## Key Takeaways
 
+- Even an ordinary employee account, if compromised, can lead to catastrophic events.
+
+- The Owner role is extremely powerful and must be carefully provisioned.
+
+- OAuth permission grants can provide persistence beyond conventional account-focused remediation, such as password resets and session revocation.
+  
 ## Unexpected Findings
+
+- Revoking a credential does not necessarily end access.
+
+- Even after an employee's password is reset and their active sessions are revoked, an OAuth permission grant can remain in place until explicitly removed.
+
+- A legitimate application can become an attacker's tool.
