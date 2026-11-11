@@ -67,11 +67,14 @@ The attacker has now established an alternative route for their rogue applicatio
 
 With the rogue application and custom scope in place, the attacker can now go after other users in the tenant. First, the attacker configured an attacker-controlled redirect URI on the rogue application. This is the address Microsoft sends the user back to after they approve a sign-in request, along with a code the app can exchange for an access token. Simply put, the attacker created a 'trap' redirect URI on their rogue application.
 
-IMG5
+![lab2-05](Screenshots/Lab2/lab2-05.png) 
+<sup><sub> **The adversary created a trap redirect URI on the rogue application.** </sub></sup>
 
 Next, the attacker constructed a malicious OAuth URL piece by piece. The components of this URL are the attacker's client ID, the trap redirect URI, and the exposed scope. The attacker can then deliver that crafted URL to a targeted employee through a phishing email (among other methods).
 
-IMG6
+
+![lab2-06](Screenshots/Lab2/lab2-06.png) 
+<sup><sub> **An employee is prompted with this malicious consent request.** </sub></sup>
 
 If an employee clicks this URL and approves the consent request, Microsoft sends the authorization code to the attacker's redirect URI. The attacker must exchange the code for the access token to the legacy application's exposed API, acting on behalf of the employee. In other words, the employee has effectively authorised the attacker's rogue application to access the legacy application, giving the attacker delegated access to the exposed API.
 
