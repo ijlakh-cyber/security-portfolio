@@ -27,6 +27,7 @@ By itself a standard account would not have much power in this scenario. However
 To this end, the attacker modified the certificates and secrets by leveraging their owner privileges. This enabled them to add a new client secret to the application.  
 
 ![lab2-01](Screenshots/Lab2/lab2-01.png) 
+<sup><sub> **Client secret created by the adversary. Note the abnormal expiration date.** </sub></sup>
 
 The client secret is effectively the password that allows the attacker to prove they are the application. The secret doesn't grant the permissions itself, but rather allows the attacker to authenticate as the application using the client ID (like a username) and newly generated client secret (like a password). The application has an associated service principal in the tenant, which holds the application's granted permissions. By authenticating as this service principal, the attacker can exercise those permissions. In essence, the attacker has transitioned from operating under a compromised standard user identity to authenticating as a highly privileged application identity. Also note the abnormally long expiration date. Typically these secrets will exist for at most two years. This deliberate setting makes it less likely that the credential will expire naturally.
 
