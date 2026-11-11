@@ -65,6 +65,18 @@ The attacker has now established an alternative route for their rogue applicatio
 
 ### Step Five: Looting
 
+With the rogue application and custom scope in place, the attacker can now go after other users in the tenant. First, the attacker configured an attacker-controlled redirect URI on the rogue application. This is the address Microsoft sends the user back to after they approve a sign-in request, along with a code the app can exchange for an access token. Simply put, the attacker created a 'trap' redirect URI on their rogue application.
+
+IMG5
+
+Next, the attacker constructed a malicious OAuth URL piece by piece. The components of this URL are the attacker's client ID, the trap redirect URI, and the exposed scope. The attacker can then deliver that crafted URL to a targeted employee through a phishing email (among other methods).
+
+IMG6
+
+If an employee clicks this URL and approves the consent request, Microsoft sends the authorization code to the attacker's redirect URI. The attacker must exchange the code for the access token to the legacy application's exposed API, acting on behalf of the employee. In other words, the employee has effectively authorised the attacker's rogue application to access the legacy application, giving the attacker delegated access to the exposed API.
+
+This approval also creates what is known as an OAuth permission grant. In essence, Entra ID records that the employee has authorised the rogue application to access the legacy application's exposed API on their behalf. The problem is that this grant exists independently of the employee's password and sign-in sessions. Even if the security team resets the employee's password or revokes their active sessions, the permission remains in place until explicitly removed. The attacker has not just stolen access to an account. They have convinced Microsoft to remember that their application is authorised to access another application. That is why the security team must separately remove the rogue application's permission grant.
+
 ## Summary of Findings
 
 ## Recommendations
