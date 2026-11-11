@@ -1,5 +1,6 @@
-# <strong>Dead Deploy </strong>
-# Investigating Azure Policy Misconfiguration and Governance Failures
+# Operation Dead Deploy
+## Investigating Azure Policy Misconfiguration and Governance Failures
+_________________
 
 ## Scenario
 A junior intern was granted temporary Contributor access within a live, multi-user Azure training tenant to deploy a test environment. Following the discovery of a non-compliant deployment, an investigation was initiated to assess resource configuration, identify deviations from organisational naming and tagging standards, and determine why Azure Policy enforcement failed to prevent such a deployment.
@@ -55,10 +56,10 @@ Azure Policy's Audit effect identifies and records non-compliant resources witho
 ## Recommendations
 It is clear that in this situation, monitoring this violation is not sufficient. Thus, it is advisable to change the policy effect to Deny to simply prevent non-compliant deployments that violate the naming standard from going through.  Furthermore, temporary Contributor access should be reviewed and restricted according to the principle of least privilege. Access should also be revoked once the intended task has been completed.  
 
-## What I learned
-- I learned that Azure Policy effects determine whether non-compliant resources are merely identified or actively prevented from being deployed. The distinction between Audit and Deny is particularly important when implementing preventative governance controls.
-- I gained practical experience examining Azure Resource Groups, resource tags, and ARM deployment history to investigate unexpected resource provisioning. 
-- In a future investigation, I would correlate deployment history with Activity Logs earlier in the process to establish a more reliable timeline of events and to identify the identity responsible for each operation.
+## Key Takeaways
+- Azure Policy effects determine whether non-compliant resources are merely identified or actively prevented from being deployed. The distinction between Audit and Deny is particularly important when implementing preventative governance controls.
+- Investigation of unexpected resource provisioning involves the analysis of Azure Resource Groups, resource tags, and ARM deployment history.
+- Correlate deployment history with Activity Logs earlier in the process during future investigations to establish a more reliable timeline of events and identify the identity responsible for each operation.
 
-## What surprised me
+## Unexpected Findings
 It is fascinating that a policy can exist, be assigned, and report compliance violations while still allowing the exact behaviour it was intended to discourage. The importance of correctly assigning Azure Policies and resource locks (i.e. governance) must therefore be an extremely meticulous and painstaking endeavour. 
