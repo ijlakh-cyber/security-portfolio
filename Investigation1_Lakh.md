@@ -18,7 +18,7 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ## Investigation Procedure
 ### Step One: Finding the Non-Compliant Deployment
-The first step was to discover the offending deployment. Upon navigating through the Azure portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only the one that did not follow the organisation's established naming convention, which in this case happens to follow Microsoft's recommended naming conventions. [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
+The first step was to discover the offending deployment. Upon navigating through the Azure portal into the Resource Manager and then accessing the list of Resource Groups, one such RG became immediately suspect, as it was only the one that did not follow the organisation's established naming convention, which in this case happens to follow Microsoft's recommended naming conventions as seen here: [Microsoft Naming Conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). This deviation made this RG a suitable starting point for further investigation. This was the first flag of the lab, and thus it shall not be shown to preserve the integrity of the exercise. 
 
 ### Step Two: Establishing a Suspect
 
