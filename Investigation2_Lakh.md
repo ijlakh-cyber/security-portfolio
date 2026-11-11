@@ -54,6 +54,16 @@ The implications of this are severe. Now the attacker can continuously mint cred
 
 ### Step Four: Persistence
 
+The attacker is inside the tenant, and has established some territory, but now needed a door to get in and out. They accomplished this task using Expose an API on the legacy application. In essence this enabled the legacy application to function as the door, by allowing other applications (such as the attacker created one) to request access, provided they have the right permissions. 
+
+This creates the door, but does not give the attacker permission to use it. That is accomplished using a custom permission called a scope on the legacy application.
+
+IMG4
+
+The existence of this door allows the attacker to come and go as they like, regardless if the client secret persists, establishing a strong, additional level of persistence. 
+
+
+
 ### Step Five: Looting
 
 ## Summary of Findings
