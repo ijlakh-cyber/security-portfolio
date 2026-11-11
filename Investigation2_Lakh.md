@@ -1,5 +1,5 @@
 # The Stolen Identity
-## Investigating Azure Policy Misconfiguration and Governance Failures
+## ...
 _________________
 
 ## Scenario
@@ -17,14 +17,16 @@ Scope: Assigned training subscription and associated resource groups
 Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
 ## Investigation Procedure
-### Step One: Finding the Non-Compliant Deployment
+### Step 1: Entry
 
-### Step Two: Establishing a Suspect
+### Step Two: Escalate
 
 
-### Step Three: Following the Trail
+### Step Three: Pivot
 
-### Step Four: Establishing the Why
+### Step Four: Persist
+
+### Step Five: Loot
 
 ## Summary of Findings
 
