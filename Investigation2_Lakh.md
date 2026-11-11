@@ -80,6 +80,10 @@ This approval also creates what is known as an OAuth permission grant. In essenc
 
 ## Summary of Findings
 
+1. Initial access was gained through phishing. A fake login page allowed the attacker to gain an MFA-satisfied token.
+2. Neglect of Least-Privilege:
+
+
 ## Recommendations
 
 ## Key Takeaways
