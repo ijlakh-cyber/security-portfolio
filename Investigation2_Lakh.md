@@ -80,8 +80,17 @@ This approval also creates what is known as an OAuth permission grant. In essenc
 
 ## Summary of Findings
 
-1. Initial access was gained through phishing. A fake login page allowed the attacker to gain an MFA-satisfied token.
-2. Neglect of Least-Privilege:
+## Summary of Findings
+
+1. The attacker gained initial access through phishing. A fake login page allowed the attacker to steal an MFA-satisfied session token after the employee completed MFA.
+
+2. There was clear neglect of the principle of least privilege. The compromised account had an Owner role over a legacy application for which it had no apparent operational need.
+
+3. The attacker leveraged these excessive privileges to move from the compromised employee identity to the legacy application's service principal, creating a new client secret that allowed them to authenticate as the application.
+
+4. The attacker achieved further persistence by creating a rogue application and assigning its service principal Owner privileges over the legacy application. This provided an alternative means of managing the legacy application's credentials, including creating replacement client secrets.
+
+5. The attacker established an additional access route by configuring an attacker-controlled redirect URI and constructing a malicious OAuth authorisation URL. This allowed the attacker to target other employees with consent-phishing attacks, leveraging their existing authenticated sessions to obtain delegated access to the legacy application's exposed API. The resulting OAuth permission grant exists independently of the employee's password and active sign-in sessions. Consequently, password resets and session revocation alone would not remove the rogue application's delegated access.
 
 
 ## Recommendations
