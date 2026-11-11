@@ -22,7 +22,13 @@ Screenshots included in this report have been selectively censored to remove sen
 The employee interacted with a fake login page. The employee, believing the integrity of the login portal, also fulfilled MFA. The attacker stole the MFA-satisfied session token, and used it to bypass the active Conditional Access policies. In other words, the attacker has taken control of an employee account. Under the guise of a legitimate employee, it is much harder to detect suspicious activity, perhaps somewhat explaining the failure of monitoring systems in place. Disastrously, the principle of least privilege had been neglected, leaving an employee account as the owner of a legacy application for which it had no apparent need. The power of an owner account should never be taken for granted.   
 
 ### Step Two: Escalation
+By itself a standard account would not have much power in this scenario. The problem is that the legacy application's service principal does. Through poor access control management, this standard employee account inadvertently has owner account power over this legacy application. If the attacker can assume control of the service principal, they will obtain the permissions of the service principal, which is (in this instance) far more powerful than the permissions of a standard account. 
 
+To this end, the attacker modified the Certificates and Secrets of this application leveraging their owner privileges. This enabled them to add a new Client Secret to the application. 
+
+![lab2-01](Screenshots/Lab2/lab2-01.png) 
+
+It is immediately suspicious that this Client Secret has such a long expiration date. This presents the attacker with the opportunity to persist on the tenant.
 
 ### Step Three: Pivoting
 
