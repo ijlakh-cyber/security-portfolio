@@ -34,9 +34,9 @@ The client secret is effectively the password that allows the attacker to prove 
 So what can the attacker do with their new application identity that they couldn't with the standard user identity? That is answered by assessing the legacy application permissions. The initial brief reveals that the legacy application had Microsoft Graph application permissions with admin consent. Thus, we can conclude that the attacker inherited the ability to exercise whatever Microsoft Graph application permissions have been granted to the legacy application.
 
 ### Step Three: Pivoting
-Despite their new found power, the attacker has a problem. Despite its long expiration date, the client secret as it stands can simply be revoked or rotated by the security team. This means the loss of the ability to masquerade as the application identity, and lose the authentication route therein.
+Despite their new permissions, the attacker has a problem. Despite its long expiration date, the client secret as it stands can simply be revoked or rotated by the security team. This means the loss of the ability to masquerade as the application identity, and lose the authentication route therein.
 
-To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants.
+To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants. This action by itself is not unusual. 
 
 ![lab2-02](Screenshots/Lab2/lab2-02.png) 
 <sup><sub> **The adversary registered a new application.** </sub></sup>
@@ -45,10 +45,12 @@ To this end, the attacker used the initially compromised standard employee ident
 <br> 
 
 
-However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the account).  
+However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the standard employee account). 
 
 ![lab2-03](Screenshots/Lab2/lab2-03.png) 
 <sup><sub> **The adversary added the new application to the owners list of the legacy application.** </sub></sup>
+
+The implications of this are severe. Now the attacker can continuously mint credentials on a whim (assuming existing permissions do not change), negating the risks of losing authentication to the legacy application identity. 
 
 ### Step Four: Persistence
 
