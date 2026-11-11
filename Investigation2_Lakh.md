@@ -1,5 +1,5 @@
 # The Stolen Identity
-## Forensic reconstruction of a five-stage OAuth consent-phishing kill chain across two linked app registrations
+## Tracing the full kill chain of an identity-based breach
 _________________
 
 ## Scenario
