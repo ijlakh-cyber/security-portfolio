@@ -3,7 +3,8 @@
 _________________
 
 ## Scenario
-An adversary was able to infiltrate the organisation's tenant. During the intrusion, no security alerts were raised, nor did monitoring systems in place identify any suspicious activity. This investigation will first attempt to identify the initial point of entry, then retrace each stage of the attack path using uncovered evidence. The objective is thus: to uncover how the adversary got in, what they did, and what they took.  
+An adversary was able to infiltrate the organisation's tenant. During the intrusion, no security alerts were raised, nor did monitoring systems in place identify any suspicious activity. The initial compromise reveals only that a company employee was phished and their session token stolen through a fake login page. The employee also fulfilled MFA, meaning that the attacker was able to use the stolen MFA-satisfied token to bypass Conditional Access policies in place. This investigation will first attempt to identify the point of entry, then retrace each stage of the attack path using uncovered evidence. The objective is thus: to uncover where the adversary got in, what they did, and what they took.  
+
 
 ## Environment
 Platform: Microsoft Azure    
