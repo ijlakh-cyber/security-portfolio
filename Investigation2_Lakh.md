@@ -58,7 +58,8 @@ The attacker is inside the tenant, and has established some territory, but now n
 
 This creates the door, but does not give the attacker permission to use it. That is accomplished using a custom permission called a scope on the legacy application.
 
-IMG4
+![lab2-04](Screenshots/Lab2/lab2-04.png) 
+<sup><sub> **The adversary added a custom scope to the legacy application.** </sub></sup>
 
 The existence of this door allows the attacker to come and go as they like, regardless if the client secret persists, establishing a strong, additional level of persistence. 
 
