@@ -30,11 +30,11 @@ The intern was previously instructed to use this identifying tag whenever they d
 
 ### Step Three: Following the Trail
 
-The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment names and timestamps, which can also provide additional context linking the deployment to the earlier findings. The deployment history revealed an unusually named deployment, which violates expected naming conventions. 
+The next stage involved examining the resource group's Deployments blade to establish how and when the resource was provisioned. Azure Resource Manager (ARM) maintains deployment records containing information such as deployment names and timestamps, which can also provide additional context linking the deployment to the earlier findings. The deployment history revealed an unusually named deployment, which again violates expected naming conventions. 
 
 ![lab1-02](Screenshots/Lab1/lab1-02.png) 
 
-Despite neglecting expected naming conventions, this deployment somehow succeeded. 
+Despite neglecting expected naming conventions twice, this deployment somehow succeeded. 
 
 ### Step Four: Establishing the Why
 
