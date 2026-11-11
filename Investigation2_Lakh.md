@@ -34,6 +34,11 @@ The client secret is effectively the password that allows the attacker to prove 
 So what can the attacker do with their new application identity that they couldn't with the standard user identity? That is answered by assessing the legacy application permissions. The initial brief reveals that the legacy application had Microsoft Graph application permissions with admin consent. Thus, we can conclude that the attacker inherited the ability to exercise whatever Microsoft Graph application permissions have been granted to the legacy application.
 
 ### Step Three: Pivoting
+Despite their new found power, the attacker has a problem. Despite its long expiration date, the client secret as it stands can simply be revoked or rotated by the security team. This means the loss of the ability to masquerade as the application identity, and lose the authentication route therein.
+
+To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants. This action by itself is not unusual. 
+
+However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the account).  
 
 
 ### Step Four: Persistence
