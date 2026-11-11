@@ -3,7 +3,7 @@
 _________________
 
 ## Scenario
-An adversary was able to infiltrate the organisation's tenant. During the intrusion, no security alerts were raised, nor did monitoring systems in place identify any suspicious activity. The initial compromise reveals only that a company employee was phished and their session token stolen through a fake login page. The employee also fulfilled MFA, meaning that the attacker was able to use the stolen MFA-satisfied token to bypass Conditional Access policies in place. This investigation will first attempt to identify the point of entry, then retrace each stage of the attack path using uncovered evidence. The objective is thus: to uncover where the adversary got in, what they did, and what they took.  
+An attacker was able to infiltrate the organisation's tenant. During the intrusion, no security alerts were raised, nor did monitoring systems in place identify any suspicious activity. The initial compromise reveals only that a company employee was phished and their session token stolen through a fake login page. The employee also fulfilled MFA, meaning that the attacker was able to use the stolen MFA-satisfied token to bypass Conditional Access policies in place. This investigation will first attempt to identify the point of entry, then retrace each stage of the attack path using uncovered evidence. The objective is thus: to uncover where the attacker got in, what they did, and what they took.  
 
 ## Environment
 Platform: Microsoft Azure    
@@ -26,7 +26,7 @@ By itself a standard account would not have much power in this scenario. However
 To this end, the attacker modified the certificates and secrets by leveraging their owner privileges. This enabled them to add a new client secret to the application.  
 
 ![lab2-01](Screenshots/Lab2/lab2-01.png) 
-<sup><sub> **Client secret created by the adversary. Note the abnormal expiration date.** </sub></sup>
+<sup><sub> **Client secret created by the attacker. Note the abnormal expiration date.** </sub></sup>
 
 The client secret is effectively the password that allows the attacker to prove they are the application. The secret doesn't grant the permissions itself, but rather allows the attacker to authenticate as the application using the client ID (like a username) and newly generated client secret (like a password). The application has an associated service principal in the tenant, which holds the application's granted permissions. By authenticating as this service principal, the attacker can exercise those permissions. In essence, the attacker has transitioned from operating under a compromised standard user identity to authenticating as a highly privileged application identity. Also note the abnormally long expiration date. Typically these secrets will exist for at most two years. This deliberate setting makes it less likely that the credential will expire naturally.
 
@@ -38,7 +38,7 @@ Despite their new permissions, the attacker has a problem. Despite its long expi
 To this end, the attacker used the initially compromised standard employee identity to register a new application. Standard users can register applications by default in many Entra tenants. This action by itself is not unusual. 
 
 ![lab2-02](Screenshots/Lab2/lab2-02.png) 
-<sup><sub> **The adversary registered a new application.** </sub></sup>
+<sup><sub> **The attacker registered a new application.** </sub></sup>
 
 <br>
 <br> 
@@ -47,7 +47,7 @@ To this end, the attacker used the initially compromised standard employee ident
 However, the attacker then added the service principal of this new application to the owners list of the legacy application (using the owner privileges mistakenly left on the standard employee account). 
 
 ![lab2-03](Screenshots/Lab2/lab2-03.png) 
-<sup><sub> **The adversary added the new application to the owners list of the legacy application.** </sub></sup>
+<sup><sub> **The attacker added the new application to the owners list of the legacy application.** </sub></sup>
 
 The implications of this are severe. Now the attacker can continuously mint credentials on a whim (assuming existing permissions do not change), negating the risks of losing authentication to the legacy application identity. 
 
@@ -58,7 +58,7 @@ The attacker was inside the tenant, and had established some territory, but now 
 This creates the door, but does not give the attacker permission to use it. That is accomplished using a custom permission called a scope on the legacy application.
 
 ![lab2-04](Screenshots/Lab2/lab2-04.png) 
-<sup><sub> **The adversary added a custom scope to the legacy application.** </sub></sup>
+<sup><sub> **The attacker added a custom scope to the legacy application.** </sub></sup>
 
 The attacker has now established an alternative route for their rogue application to request access to the legacy application, independent of the original client secret. This provides another layer of persistence, should that original authentication method be revoked.
 
@@ -67,7 +67,7 @@ The attacker has now established an alternative route for their rogue applicatio
 With the rogue application and custom scope in place, the attacker can now go after other users in the tenant. First, the attacker configured an attacker-controlled redirect URI on the rogue application. This is the address Microsoft sends the user back to after they approve a sign-in request, along with a code the app can exchange for an access token. Simply put, the attacker created a 'trap' redirect URI on their rogue application.
 
 ![lab2-05](Screenshots/Lab2/lab2-05.png) 
-<sup><sub> **The adversary created a trap redirect URI on the rogue application.** </sub></sup>
+<sup><sub> **The attacker created a trap redirect URI on the rogue application.** </sub></sup>
 
 Next, the attacker constructed a malicious OAuth URL piece by piece. The components of this URL are the attacker's client ID, the trap redirect URI, and the exposed scope. The attacker can then deliver that crafted URL to a targeted employee through a phishing email (among other methods).
 
@@ -94,6 +94,9 @@ This approval also creates what is known as an OAuth permission grant. In essenc
 
 
 ## Recommendations
+
+-Enforce the principle of Least-Privilege on all accounts. 
+-Remove the attacker's client secret.
 
 ## Key Takeaways
 
