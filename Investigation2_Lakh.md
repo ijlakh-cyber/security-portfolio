@@ -62,6 +62,8 @@ This creates the door, but does not give the attacker permission to use it. That
 
 The attacker has now established an alternative route for their rogue application to request access to the legacy application, independent of the original client secret. This provides another layer of persistence, should that original authentication method be revoked.
 
+This is an example of what is known as a confused deputy attack. The legacy application is a legitimate, trusted application with its own permissions and resources. However, the attacker has manipulated the relationship between the two applications to get the legacy application to accept requests from an application under their control. Thus, the attacker is using the legacy application as a trusted intermediary to access resources they would not otherwise have permission to access directly.
+
 ### Step Five: Looting
 
 With the rogue application and custom scope in place, the attacker can now go after other users in the tenant. First, the attacker configured an attacker-controlled redirect URI on the rogue application. This is the address Microsoft sends the user back to after they approve a sign-in request, along with a code the app can exchange for an access token. Simply put, the attacker created a 'trap' redirect URI on their rogue application.
