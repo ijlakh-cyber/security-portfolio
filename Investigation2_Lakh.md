@@ -1,5 +1,5 @@
 # The Stolen Identity
-## Investigating a five-stage OAuth consent-phishing kill chain in a live Azure tenant through forensic analysis of two linked app registrations.
+## Forensic reconstruction of a five-stage OAuth consent-phishing kill chain across two linked app registrations
 _________________
 
 ## Scenario
