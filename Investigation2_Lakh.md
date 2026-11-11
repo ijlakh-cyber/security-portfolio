@@ -3,7 +3,7 @@
 _________________
 
 ## Scenario
-
+An adversary was able to infiltrate the organisation's tenant. During the intrusion, no security alerts were raised, nor did monitoring systems in place identify any suspicious activity.. This investigation will first attempt to identify the initial point of entry, then retrace each stage of the attack path using uncovered evidence. The objective is thus: to uncover how the adversary got in, what they did, and what they took.  
 
 ## Environment
 Platform: Microsoft Azure    
