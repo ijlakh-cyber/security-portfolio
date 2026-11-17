@@ -3,7 +3,8 @@
 _________________
 
 ## Scenario
- 
+
+The organisation, now wary following a recent security breach, has requested an audit of its Azure tenant to identify any violations of least-privilege that require remediation.
 
 ## Environment
 Platform: Microsoft Azure  
