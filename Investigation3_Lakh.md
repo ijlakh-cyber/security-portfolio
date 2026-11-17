@@ -38,7 +38,7 @@ The first question is whether or not the account needs Owner privileges in the f
 While that CSV is very useful at a glance, there are notable blind spots in the export that should be considered carefully. Within it, group assignments do not reveal the individual members receiving access. It may also omit orphaned identities (i.e. identities that have been deleted or can no longer be resolved), which require further investigation. The Azure Command Line Interface (CLI) allows an auditor to enumerate the same assignments, but also provides access to fields that are not as readily visible in the portal, such as principal IDs and unresolved principal names. A missing principal name does not necessarily mean the account has been deleted, but it does indicate that the identity could not be resolved, and thus warrants investigation. Note that the audit account does not have sufficient permissions to complete the principal lookup, so no names are returned.
 
 ![lab3-03](Screenshots/Lab3/lab3-03.png) 
-<sup><sub> **Figure 3: An Azure CLI command to enumerate role assignments. An alternative PowerShell cmdlet is 'Get-AzRoleAssignment'.** </sub></sup>
+<sup><sub> **Figure 3: An Azure CLI command to enumerate role assignments, and its output.** </sub></sup>
 
 The organisation provides a JSON output of this command, run at the appropriate scope. Subsequent analysis reveals one assignment where the principalName is blank (null), indicating that the principal could not be resolved. The organisation confirms that the account was deleted, but the associated permission remains assigned.
 
@@ -78,15 +78,15 @@ The organisation had established the eligible group assignment for the audit acc
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
 
-The audit account now has access to the previously hidden resource group. The first step is to examine the IAM blade.The output CSV reveals some very interesting findings. 
+The audit account now has access to the previously hidden resource group. The first step is to examine the IAM blade. The output CSV reveals some very interesting findings. 
 
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
 <sup><sub> **Figure 9: The Azure Access Control (IAM) blade at hidden resource group scope.** </sub></sup>
 
-The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment on a management group. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary. 
+The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment at a management group scope. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary. 
 
 ![lab3-10](Screenshots/Lab3/lab3-10.png) 
-<sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope.** </sub></sup>
+<sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope, and its output.** </sub></sup>
 
 The CLI output identifies a direct Reader assignment to a group within the hidden resource group. It has also successfully resolved the group's name and type. Notably, the assignment was created and last updated by the same principal previously identified as holding extensive privileges across the Azure hierarchy. Although this warrants further investigation, the output alone does not establish that the assignment is inappropriate.
 
@@ -97,11 +97,16 @@ Resource Graph allows the audit to query role assignments across multiple subscr
 
 
 ![lab3-12](Screenshots/Lab3/lab3-12.png) 
-<sup><sub> **Figure 11: The CSV export of the above targeted KQL query.** </sub></sup>
+<sup><sub> **Figure 12: The CSV export of the above targeted KQL query.** </sub></sup>
 
-Filtering by the previously identified principal ID revealed 18 assignments, including three particularly significant privileges: User Access Administrator at the tenant root and Security Administrator and Owner at separate management group scopes. This provides a broader view of the principal's access across the Azure hierarchy and highlights permissions warranting further investigation.
+Filtering by the previously identified principal ID revealed 18 associated role assignments across the Azure hierarchy. When considered alongside the earlier IAM findings, three particularly significant privileges stand out: User Access Administrator at the tenant root, and Security Administrator and Owner each at separate management group scopes. This demonstrates how Resource Graph can provide a broader view of a principal's assignments across the environment.
 
+Following the procedure laid out in step 4, PIM reveals this:
 
+![lab3-13](Screenshots/Lab3/lab3-13.png) 
+<sup><sub> **Figure 13:  A PIM Assignments (Preview) export of the hidden resource group within the subscription.** </sub></sup>
+
+The most important discovery is that the principal's Owner, Security Admin, and User Access Administrator assignments are all active, inherited, and permanent, with no scheduled expiry.
 
 
 
