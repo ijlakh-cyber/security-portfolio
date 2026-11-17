@@ -94,19 +94,12 @@ The CLI confirms the same direct Owner assignment identified in the IAM export, 
 ![lab3-12](Screenshots/Lab3/lab3-12.png) 
 <sup><sub> **Figure 12: The CSV export of the above targeted KQL query.** </sub></sup>
 
-The KQL query confirmed that the principal behind the Owner assignment is a User account, rather than a group or service principal. Its principal ID matches the object ID found in the IAM export, confirming that this user has Owner permissions directly at the hidden resource group scope. The account's display name and whether or not it requires this level of access still need to be verified.
-
-
-
-Filtering by the previously identified principal ID revealed 18 associated role assignments across the Azure hierarchy. When considered alongside the earlier IAM findings, three particularly significant privileges stand out: User Access Administrator at the tenant root, and Security Administrator and Owner each at separate management group scopes. This demonstrates how Resource Graph can provide a broader view of a principal's assignments across the environment.
-
-Following the procedure laid out in step 4, PIM reveals this:
+The KQL query confirmed that the principal behind the Owner assignment is a User account, rather than a group or service principal. Its principal ID matches the object ID found in the IAM export, confirming that this user has Owner permissions directly at the hidden resource group scope. The account's display name and assignment details were then corroborated through PIM, allowing the identity behind the Object ID to be established.
 
 ![lab3-13](Screenshots/Lab3/lab3-13.png) 
 <sup><sub> **Figure 13:  A PIM Assignments (Preview) export of the hidden resource group within the subscription.** </sub></sup>
 
-The most important discovery is that the principal's Owner, Security Admin, and User Access Administrator assignments are all active, inherited, and permanent, with no scheduled expiry.
-
+The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The timestamp corroborates this user (whose name is revealed by PIM) with the object ID from earlier. This identifies this highlighted user as the account holding the Owner assignment and makes it the primary account requiring further investigation into whether this level of access is justified.
 
 
 
