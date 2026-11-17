@@ -1,5 +1,5 @@
 # The Stolen Identity
-## Tracing the full kill chain of an identity-based breach
+## Tracing the Full Kill Chain of an Identity-based Breach
 _________________
 
 ## Scenario
