@@ -77,9 +77,9 @@ The methods thus far have assessed active role assignments, but have not conside
 
 Reviewing both role assignment types allows an auditor to identify privileges that may otherwise go unnoticed and assess whether they are appropriately assigned. PIM provides this additional layer of visibility. 
 
-### Step 5: Combining these Methodologies
+## The Investigation: Combining these Methodologies
 
-This audit demonstrated the aforementioned methods together to examine least-privilege on a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (i.e. allows it to see the hidden resource group).
+These methods are best used together. To demonstrate this combined approach, the auditor was authorised by the organisation to conduct a least-privilege review of a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (i.e. allows it to see the hidden resource group).
 
 ![lab3-07](Screenshots/Lab3/lab3-07.png) 
 <sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
