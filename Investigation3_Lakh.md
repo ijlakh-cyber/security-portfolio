@@ -90,6 +90,19 @@ The IAM export revealed four Owner assignments, two of which are assigned to the
 
 The CLI output identifies a direct Reader assignment to a group within the hidden resource group. It has also successfully resolved the group's name and type. Notably, the assignment was created and last updated by the same principal previously identified as holding extensive privileges across the Azure hierarchy. Although this warrants further investigation, the output alone does not establish that the assignment is inappropriate.
 
+Resource Graph allows the audit to query role assignments across multiple subscriptions and resource scopes in a single KQL query, rather than examining each scope individually through the IAM blade or CLI. 
+
+![lab3-11](Screenshots/Lab3/lab3-11.png) 
+<sup><sub> **Figure 11: A targeted KQL query using the previously identified principal ID.** </sub></sup>
+
+
+![lab3-12](Screenshots/Lab3/lab3-12.png) 
+<sup><sub> **Figure 11: The CSV export of the above targeted KQL query.** </sub></sup>
+
+Filtering by the previously identified principal ID revealed 18 assignments, including three particularly significant privileges: User Access Administrator at the tenant root and Security Administrator and Owner at separate management group scopes. This provides a broader view of the principal's access across the Azure hierarchy and highlights permissions warranting further investigation.
+
+
+
 
 
 
