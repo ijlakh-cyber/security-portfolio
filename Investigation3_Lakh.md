@@ -64,7 +64,14 @@ The methods thus far have assessed active role assignments, but have not conside
 ![lab3-06](Screenshots/Lab3/lab3-06.png) 
 <sup><sub> **Figure 6: A PIM Assignments (Preview) export of an accessible resource group within the subscription. Highlighted is an eligible role assignment, which grants the principal the ability to activate the role for up to eight hours, after which the active assignment expires.** </sub></sup>
 
+Reviewing both role assignment types allows an auditor to identify privileges that may otherwise go unnoticed and assess whether they are appropriately assigned. PIM provides this additional layer of visibility. 
+
 ### Step 5: The Hunt
+
+This audit will now apply the aforementioned methods together. The organisation granted the audit account an eligible role assignment through a designated group. Activating this role will expand the scope of resources accessible to the audit account.
+
+![lab3-07](Screenshots/Lab3/lab3-07.png) 
+<sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
 
 ## Findings and Investigation
 ## Summary of Findings
