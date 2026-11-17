@@ -68,7 +68,7 @@ Reviewing both role assignment types allows an auditor to identify privileges th
 
 ### Step 5: The Hunt
 
-This audit will now apply the aforementioned methods together to examine a previously hidden resource group. The audit account first requests activation of its eligible role assignment. Activating this role will expand the scope of resources accessible to the audit account (i.e. allow it to see the hidden resource group).
+This audit demonstrated the aforementioned methods together to examine least-privilege on a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (i.e. allows it to see the hidden resource group).
 
 ![lab3-07](Screenshots/Lab3/lab3-07.png) 
 <sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
@@ -76,12 +76,14 @@ This audit will now apply the aforementioned methods together to examine a previ
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
 
-The audit account now has access to the previously hidden resource group. The first step is to examine the IAM blade. The output CSV reveals some very interesting findings. 
+The audit account now had access to the previously hidden resource group. The first step was to examine the IAM blade. The output CSV immedaitely revealed a red flag.
 
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
-<sup><sub> **Figure 9: The Azure Access Control (IAM) blade at hidden resource group scope.** </sub></sup>
+<sup><sub> **Figure 9: The Azure Access Control (IAM) blade at the hidden resource group scope, revealing an overprovisioned account.** </sub></sup>
 
-The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment at a management group scope. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary. 
+The IAM export revealed an Owner role assignment directly at the hidden resource group scope. The assignment grants the associated principal extensive control over the resource group, including the ability to manage who has access to it. The identity behind the assignment and whether it actually needs this level of access ought to be checked, lest someone makes unauthorised changes to resources or grants themselves/others additional access.
+
+The principal's identity and business justification should be validated to determine whether this level of access is necessary. Unnecessary Owner permissions could allow unauthorised changes to resources and the assignment of additional privileges.
 
 ![lab3-10](Screenshots/Lab3/lab3-10.png) 
 <sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope, and its output.** </sub></sup>
