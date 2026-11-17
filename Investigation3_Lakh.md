@@ -76,28 +76,27 @@ This audit demonstrated the aforementioned methods together to examine least-pri
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
 
-The audit account now had access to the previously hidden resource group. The first step was to examine the IAM blade. The output CSV immedaitely revealed a red flag.
+With this new time-bound role allowing access to the hidden resource group, the audit account followed the 3 methodologies described in the steps described at length above. First it used IAM, then CLI, then KQL, and finally PIM. 
 
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
 <sup><sub> **Figure 9: The Azure Access Control (IAM) blade at the hidden resource group scope, revealing an overprovisioned account.** </sub></sup>
 
 The IAM export revealed an Owner role assignment directly at the hidden resource group scope. The assignment grants the associated principal extensive control over the resource group, including the ability to manage who has access to it. The identity behind the assignment and whether it actually needs this level of access ought to be checked, lest someone makes unauthorised changes to resources or grants themselves/others additional access.
 
-The principal's identity and business justification should be validated to determine whether this level of access is necessary. Unnecessary Owner permissions could allow unauthorised changes to resources and the assignment of additional privileges.
-
 ![lab3-10](Screenshots/Lab3/lab3-10.png) 
 <sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope, and its output.** </sub></sup>
 
-The CLI output identifies a direct Reader assignment to a group within the hidden resource group. It has also successfully resolved the group's name and type. Notably, the assignment was created and last updated by the same principal previously identified as holding extensive privileges across the Azure hierarchy. Although this warrants further investigation, the output alone does not establish that the assignment is inappropriate.
-
-Resource Graph allows the audit to query role assignments across multiple subscriptions and resource scopes in a single KQL query, rather than examining each scope individually through the IAM blade or CLI. 
+The CLI confirms the same direct Owner assignment identified in the IAM export, including the associated user principal. It also reveals a condition restricting certain role-assignment operations. The user's identity and whether the level of access is justified still need to be investigated.
 
 ![lab3-11](Screenshots/Lab3/lab3-11.png) 
-<sup><sub> **Figure 11: A targeted KQL query using the previously identified principal ID.** </sub></sup>
-
+<sup><sub> **Figure 11: A targeted KQL query using the previously identified object ID.** </sub></sup>
 
 ![lab3-12](Screenshots/Lab3/lab3-12.png) 
 <sup><sub> **Figure 12: The CSV export of the above targeted KQL query.** </sub></sup>
+
+The KQL query confirmed that the principal behind the Owner assignment is a User account, rather than a group or service principal. Its principal ID matches the object ID found in the IAM export, confirming that this user has Owner permissions directly at the hidden resource group scope. The account's display name and whether or not it requires this level of access still need to be verified.
+
+
 
 Filtering by the previously identified principal ID revealed 18 associated role assignments across the Azure hierarchy. When considered alongside the earlier IAM findings, three particularly significant privileges stand out: User Access Administrator at the tenant root, and Security Administrator and Owner each at separate management group scopes. This demonstrates how Resource Graph can provide a broader view of a principal's assignments across the environment.
 
