@@ -19,11 +19,15 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ## Audit Methodology
 
-1. ACCESS CONTROL
-2. COMMAND LINE
-3. RESOURCE GRAPH
-4. PIM
-5. THE HUNT
+### Step 1: Access Control (IAM)
+
+### Step 2: Azure CLI
+
+### Step 3: Resource Graph (KQL)
+
+### Step 4: Privileged Identity Management (PIM)
+
+### Step 5: The Hunt
 
 ## Findings and Investigation
 ## Summary of Findings
