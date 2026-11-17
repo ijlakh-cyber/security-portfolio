@@ -68,7 +68,7 @@ Reviewing both role assignment types allows an auditor to identify privileges th
 
 ### Step 5: The Hunt
 
-This audit will now apply the aforementioned methods together. The audit account first requests activation of its eligible role assignment through a designated group. Activating this role will expand the scope of resources accessible to the audit account.
+This audit will now apply the aforementioned methods together to examine a previously hidden resource group. The audit account first requests activation of its eligible role assignment through a designated group. Activating this role will expand the scope of resources accessible to the audit account.
 
 ![lab3-07](Screenshots/Lab3/lab3-07.png) 
 <sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
@@ -77,6 +77,14 @@ The organisation had established the eligible group assignment for the audit acc
 
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
+
+The audit account now has access to the previously hidden resource group. The first step is to examine the IAM blade.The output CSV reveals some very interesting findings. 
+
+![lab3-09](Screenshots/Lab3/lab3-09.png) 
+<sup><sub> **Figure 9: The Azure Access Control (IAM) blade at hidden resource group scope.** </sub></sup>
+
+The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment on a management group. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary.
+
 
 
 
