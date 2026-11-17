@@ -35,7 +35,7 @@ The first question is whether or not the account needs Owner privileges in the f
 
 ### Step 2: Azure CLI
 
-While CSV is very useful at a glance, there are notable blind spots in the export that should be considered carefully. Group assignments, for example, do not reveal the individual members receiving access. It may also omit orphaned identities (i.e. unknown or deleted accounts), which require further investigation. The Azure Command Line Interface (CLI) allows an auditor to enumerate the same assignments, but also provides access to fields that are not as readily visible in the portal, such as principal IDs and unresolved principal names. A missing principal name does not necessarily mean the account has been deleted, but it does indicate that the identity could not be resolved, and thus warrants investigation.
+While CSV is very useful at a glance, there are notable blind spots in the export that should be considered carefully. Within it, group assignments do not reveal the individual members receiving access. It may also omit orphaned identities (i.e. unknown or deleted accounts), which require further investigation. The Azure Command Line Interface (CLI) allows an auditor to enumerate the same assignments, but also provides access to fields that are not as readily visible in the portal, such as principal IDs and unresolved principal names. A missing principal name does not necessarily mean the account has been deleted, but it does indicate that the identity could not be resolved, and thus warrants investigation.
 
 ### Step 3: Resource Graph (KQL)
 
