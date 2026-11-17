@@ -83,7 +83,12 @@ The audit account now has access to the previously hidden resource group. The fi
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
 <sup><sub> **Figure 9: The Azure Access Control (IAM) blade at hidden resource group scope.** </sub></sup>
 
-The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment on a management group. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary.
+The IAM export revealed four Owner assignments, two of which are assigned to the same principal at subscription scope. That same principal also holds an Owner assignment on a management group. Further investigation of its other role assignments revealed additional privileges, including Security Administrator at another management group and User Access Administrator at the tenant root scope (/). This highlights a principal with extensive privileges across the Azure hierarchy, warranting further investigation into whether these assignments are actually necessary. 
+
+![lab3-10](Screenshots/Lab3/lab3-10.png) 
+<sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope.** </sub></sup>
+
+The CLI output identifies a direct Reader assignment to a group within the hidden resource group. It has also successfully resolved the group's name and type. Notably, the assignment was created and last updated by the same principal previously identified as holding extensive privileges across the Azure hierarchy. Although this warrants further investigation, the output alone does not establish that the assignment is inappropriate.
 
 
 
