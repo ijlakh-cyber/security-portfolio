@@ -45,12 +45,12 @@ The organisation provides a JSON output of this command, run at the appropriate 
 ![lab3-04](Screenshots/Lab3/lab3-04.png) 
 <sup><sub> **Figure 4: An orphaned account.** </sub></sup>
 
-Deleting an identity does not automatically remove its Azure RBAC role assignments. If the original identity were restored, it could potentially regain access through these leftover permissions. It is therefore imperative to identify and remove such orphaned assignments.
+Deleting an identity does not automatically remove its Azure RBAC role assignments. If the original identity were restored with its original object ID, it could potentially regain access through these leftover permissions. It is therefore imperative to identify and remove such orphaned assignments.
 
 
 ### Step 3: Resource Graph (KQL)
 
-Whereas the IAM blade and Azure CLI each work one scope at a time, Resource Graph allows an auditor to query role assignments across multiple subscriptions within the tenant in a single Kusto Query Language (KQL) query. This makes it possible to examine many subscriptions simultaneously, dramatically increasing efficiency.
+Whereas the IAM blade and Azure CLI are generally used to inspect role assignments at a particular resource scope, Resource Graph allows an auditor to query role assignments across multiple subscriptions within the tenant in a single Kusto Query Language (KQL) query. This makes it possible to examine many subscriptions simultaneously, dramatically increasing efficiency.
 
 ![lab3-05](Screenshots/Lab3/lab3-05.png) 
 <sup><sub> **Figure 5: A targeted KQL query using the previously identified orphaned principal ID.** </sub></sup>
@@ -76,7 +76,7 @@ This audit demonstrated the aforementioned methods together to examine least-pri
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
 
-With this new time-bound role allowing access to the hidden resource group, the audit account followed the 3 methodologies described in the steps described at length above. First it used IAM, then CLI, then KQL, and finally PIM. 
+With this new time-bound role allowing access to the hidden resource group, the audit account applied the methods described above: IAM, CLI, KQL, and PIM to corroborate the findings.
 
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
 <sup><sub> **Figure 9: The Azure Access Control (IAM) blade at the hidden resource group scope, revealing an overprovisioned account.** </sub></sup>
@@ -99,7 +99,7 @@ The KQL query confirmed that the principal behind the Owner assignment is a User
 ![lab3-13](Screenshots/Lab3/lab3-13.png) 
 <sup><sub> **Figure 13:  A PIM Assignments (Preview) export of the hidden resource group within the subscription.** </sub></sup>
 
-The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The timestamp corroborates this user (whose name is revealed by PIM) with the object ID from earlier. This identifies this highlighted user as the account holding the Owner assignment and makes it the primary account requiring further investigation into whether this level of access is justified.
+The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The matching assignment scope, role, and timestamp corroborate this user's identity with the object ID identified earlier, and makes it the primary identity requiring further investigation into whether or not this level of access is justified.
 
 
 
