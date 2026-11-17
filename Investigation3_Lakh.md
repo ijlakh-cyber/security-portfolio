@@ -18,6 +18,13 @@ Scope: Assigned training tenant, including Azure resource role assignments acros
 Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
 ## Audit Methodology
+
+1. ACCESS CONTROL
+2. COMMAND LINE
+3. RESOURCE GRAPH
+4. PIM
+5. THE HUNT
+
 ## Findings and Investigation
 ## Summary of Findings
 ## Methodology Comparison
