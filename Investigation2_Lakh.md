@@ -8,7 +8,7 @@ An attacker was able to infiltrate the organisation's tenant. During the intrusi
 ## Environment
 Platform: Microsoft Azure    
 Cloud environment: Live multi-user Azure training tenant    
-Services: Microsoft Entra ID (App registrations)
+Services: Microsoft Entra ID (App registrations)  
 Tools: Azure Portal    
 Access level: Reader (read-only)    
 Scope: Assigned training tenant, including the two linked app registrations and their associated configuration and identity objects.
