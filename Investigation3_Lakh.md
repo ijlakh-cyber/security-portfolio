@@ -1,5 +1,5 @@
 # Privilege Audit
-## Examining Azure Resource Access, Privilege Assignments, and RBAC Audit Methodologies
+## Comparing and Applying Four Azure RBAC Audit Methods
 _________________
 
 ## Scenario
