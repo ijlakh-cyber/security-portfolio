@@ -21,6 +21,17 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ### Step 1: Access Control (IAM)
 
+The first logical step in this access audit is to establish a baseline of the permissions assigned across the Azure environment. To this end, the Access Control (IAM) blade provides an overview of role assignments at each resource scope (i.e. direct or inherited) at a glance. 
+
+Lab3-01
+
+More useful still is the full CSV export of role assignments, which was provided by the organisation, as the audit account did not have sufficient permissions to retrieve the full export directly from the system.
+
+Lab3-02
+
+
+
+
 ### Step 2: Azure CLI
 
 ### Step 3: Resource Graph (KQL)
