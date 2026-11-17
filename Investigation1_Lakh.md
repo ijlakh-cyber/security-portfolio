@@ -8,7 +8,7 @@ A junior intern was granted temporary Contributor access within a live, multi-us
 ## Environment
 Platform: Microsoft Azure    
 Cloud environment: Live multi-user Azure training tenant    
-Services: Resource Groups, Azure Resource Manager (ARM) Deployments, Azure Policy
+Services: Resource Groups, Azure Resource Manager (ARM) Deployments, Azure Policy  
 Tools: Azure Portal    
 Access level: Reader (read-only)    
 Scope: Assigned training subscription and associated resource groups
