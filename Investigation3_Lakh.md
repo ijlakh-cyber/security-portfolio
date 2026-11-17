@@ -114,8 +114,7 @@ The most significant finding is that this user has permanent Owner access direct
 
 ## Summary of Findings
 
-The investigation identified a User account that holds a direct, active, permanent Owner assignment at the hidden resource group. This assignment does not require PIM activation and has no scheduled expiry shown. Although certain role-assignment operations are restricted by a condition, the underlying Owner privileges remain.
-Each practice outlined in the audit methodology steps contributed a different piece of evidence to establish this finding.
+The investigation identified a User account that holds a direct, active, permanent Owner assignment at the hidden resource group. This assignment does not require PIM activation and has no scheduled expiry shown. Each methodology outlined in the steps above contributed a different piece of evidence to establish this finding.
 
 1. IAM – Discovery of the Owner Assignment
 
@@ -131,12 +130,19 @@ The targeted KQL query confirmed that the principal behind the assignment was a 
 
 4. Privileged Identity Management (PIM) – Verification of the Account
 
-The PIM export identified the assigned user and confirmed that the Owner assignment was active, direct, and permanent. The matching assignment scope, role, and timestamp corroborated the identity with the Object ID identified earlier.
+The PIM export identified the assigned user and confirmed that the Owner assignment was active, direct, and permanent. The matching assignment scope, role, and timestamp linked the PIM entry to the Object ID identified earlier.
 
 ## Recommendations
 - Review whether the assigned user requires Owner privileges at the hidden resource group scope.
 - Where unnecessary, replace Owner with a less privileged role that meets the user's requirements.
 - Consider replacing permanent active access with an eligible PIM assignment requiring activation.
 - Conduct regular reviews of privileged assignments to identify excessive or outdated access.
+  
 ## Key Takeaways
+- Permanent privileged access should be regularly reviewed against the principle of least privilege.
+- No single tool provides complete visibility into Azure role assignments.
+- IAM, CLI, Resource Graph, and PIM synergise very well.
+- Correlating evidence across multiple sources is necessary to establish the identity and permissions behind an assignment.
+  
 ## Unexpected Findings
+While IAM, CLI, and Resource Graph enumerate active role assignments, they do not provide the same visibility into eligible assignments as PIM. As a result, privileges that can be activated when needed may remain overlooked during an audit.
