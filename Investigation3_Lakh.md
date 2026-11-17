@@ -21,13 +21,15 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ### Step 1: Access Control (IAM)
 
-The first logical step in this access audit is to establish a baseline of the permissions assigned across the Azure environment. To this end, the Access Control (IAM) blade provides an overview of role assignments at each resource scope (i.e. direct or inherited) at a glance. 
+The first logical step in this access audit is to establish a baseline of the permissions assigned across the Azure environment. To this end, the Access Control (IAM) blade provides an overview of role assignments at each resource scope (i.e. direct or inherited) at a glance. Note that in this scenario, the audit account does not have sufficient permissions to view the role assignments directly through the IAM blade.
 
-Lab3-01
+![lab3-01](Screenshots/Lab3/lab3-01.png) 
+<sup><sub> **Figure 1: Azure Access Control (IAM) blade at subscription scope.** </sub></sup>
 
-More useful still is the full CSV export of role assignments, which was provided by the organisation, as the audit account did not have sufficient permissions to retrieve the full export directly from the system.
+More useful still is the full CSV export of role assignments, which was provided by the organisation, as the audit account does not have sufficient permissions to retrieve the full export directly from the system. Upon review of this document, it is revealed that one user has the Owner role at the subscription level and has separate Owner assignments across numerous resource groups within that same subscription. To quantify: the account has 64 Owner assignments across one subscription, consisting of 1 subscription level assignment and 63 resource group level assignments. The first question is whether or not the account needs Owner privileges in the first place. Additionally, as the subscription level assignment already grants Owner access to its child resource groups, the individual resource group level assignments are redundant. And further still, removing the broad assignment on the subscription would not fully revoke privileges across each resource group. Each separate assignment would need to be identified and removed as well. 
 
-Lab3-02
+![lab3-02](Screenshots/Lab3/lab3-02.png) 
+<sup><sub> **Figure 2: Full CSV export of role assignments, sorted by sign-in name.** </sub></sup>
 
 
 
