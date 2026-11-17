@@ -112,10 +112,31 @@ The KQL query confirmed that the principal behind the Owner assignment is a User
 
 The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The matching assignment scope, role, and timestamp corroborate this user's identity with the object ID identified earlier, and makes it the primary identity requiring further investigation into whether or not this level of access is justified.
 
-
-
-## Findings and Investigation
 ## Summary of Findings
+
+The investigation identified a User account that holds a direct, active, permanent Owner assignment at the hidden resource group. This assignment does not require PIM activation and has no scheduled expiry shown. Although certain role-assignment operations are restricted by a condition, the underlying Owner privileges remain.
+Each practice outlined in the audit methodology steps contributed a different piece of evidence to establish this finding.
+
+1. IAM – Discovery of the Owner Assignment
+
+The IAM export revealed a direct Owner assignment at the hidden resource group scope. This established the existence of an account with extensive control over the resource group, including the ability to manage access permissions.
+
+2. Azure CLI – Examination of the Assignment
+
+The CLI output corroborated the Owner assignment and exposed additional details, including the principal ID and a condition restricting certain role-assignment operations. This provided further context about the permissions associated with the assignment.
+
+3. Resource Graph (KQL) – Principal Identification
+
+The targeted KQL query confirmed that the principal behind the assignment was a User account, rather than a group or service principal. Its principal ID matched the Object ID identified in the earlier IAM and CLI investigations.
+
+4. Privileged Identity Management (PIM) – Verification of the Account
+
+The PIM export identified the assigned user and confirmed that the Owner assignment was active, direct, and permanent. The matching assignment scope, role, and timestamp corroborated the identity with the Object ID identified earlier.
+
 ## Recommendations
+- Review whether the assigned user requires Owner privileges at the hidden resource group scope.
+- Where unnecessary, replace Owner with a less privileged role that meets the user's requirements.
+- Consider replacing permanent active access with an eligible PIM assignment requiring activation.
+- Conduct regular reviews of privileged assignments to identify excessive or outdated access.
 ## Key Takeaways
 ## Unexpected Findings
