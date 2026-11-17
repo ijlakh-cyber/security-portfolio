@@ -66,7 +66,7 @@ Whereas the IAM blade and Azure CLI are generally used to inspect role assignmen
 ![lab3-05](Screenshots/Lab3/lab3-05.png) 
 <sup><sub> **Figure 5: A targeted KQL query using the previously identified orphaned principal ID.** </sub></sup>
 
-The results available to the audit account remain restricted by its permissions, as evident in the broader CSV export, which does not include the orphaned assignment identified through the earlier CLI investigation. Although the audit account cannot retrieve the full set of assignments in this scenario, Resource Graph remains a particularly useful tool for conducting tenant-wide access reviews when sufficient permissions are available.
+The results available to the audit account remain restricted by its permissions, as evident in the Resource Graph CSV export, which does not include the orphaned assignment identified through the earlier CLI investigation. Although the audit account cannot retrieve the full set of assignments in this scenario, Resource Graph remains a particularly useful tool for conducting tenant-wide access reviews when sufficient permissions are available.
 
 ### Step 4: Privileged Identity Management (PIM)
 
@@ -79,7 +79,7 @@ Reviewing both role assignment types allows an auditor to identify privileges th
 
 ## The Investigation: Combining these Methodologies
 
-These methods are best used together. To demonstrate this combined approach, the auditor was authorised by the organisation to conduct a least-privilege review of a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (i.e. allows it to see the hidden resource group).
+These methods are best used together. To demonstrate this combined approach, the auditor was authorised by the organisation to conduct a least-privilege review of a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (allowing it to see the hidden resource group).
 
 ![lab3-07](Screenshots/Lab3/lab3-07.png) 
 <sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
@@ -90,14 +90,14 @@ These methods are best used together. To demonstrate this combined approach, the
 With this new time-bound role allowing access to the hidden resource group, the audit account applied the methods described above: IAM, CLI, KQL, and PIM to corroborate the findings.
 
 ![lab3-09](Screenshots/Lab3/lab3-09.png) 
-<sup><sub> **Figure 9: The Azure Access Control (IAM) blade at the hidden resource group scope, revealing an overprovisioned account.** </sub></sup>
+<sup><sub> **Figure 9: The Azure Access Control (IAM) blade at the hidden resource group scope, revealing a direct Owner assignment.** </sub></sup>
 
 The IAM export revealed an Owner role assignment directly at the hidden resource group scope. The assignment grants the associated principal extensive control over the resource group, including the ability to manage who has access to it. The identity behind the assignment and whether it actually needs this level of access ought to be checked, lest someone makes unauthorised changes to resources or grants themselves/others additional access.
 
 ![lab3-10](Screenshots/Lab3/lab3-10.png) 
 <sup><sub> **Figure 10: CLI command to enumerate role assignments at hidden resource group scope, and its output.** </sub></sup>
 
-The CLI confirms the same direct Owner assignment identified in the IAM export, including the associated user principal. It also reveals a condition restricting certain role-assignment operations. The user's identity and whether the level of access is justified still need to be investigated.
+The CLI confirms the same direct Owner assignment identified in the IAM export, including the associated user principal. The user's identity and whether the level of access is justified or not still need to be investigated.
 
 ![lab3-11](Screenshots/Lab3/lab3-11.png) 
 <sup><sub> **Figure 11: A targeted KQL query using the previously identified object ID.** </sub></sup>
@@ -110,7 +110,7 @@ The KQL query confirmed that the principal behind the Owner assignment is a User
 ![lab3-13](Screenshots/Lab3/lab3-13.png) 
 <sup><sub> **Figure 13:  A PIM Assignments (Preview) export of the hidden resource group within the subscription.** </sub></sup>
 
-The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The matching assignment scope, role, and timestamp corroborate this user's identity with the object ID identified earlier, and makes it the primary identity requiring further investigation into whether or not this level of access is justified.
+The most significant finding is that this user has permanent Owner access directly at the hidden resource group scope. Unlike an eligible PIM assignment, this access does not require activation and has no scheduled expiry shown. The matching assignment scope, role, and timestamp link the PIM entry to the Object ID found earlier, making this the primary account requiring further investigation into whether or not this level of access is justified.
 
 ## Summary of Findings
 
@@ -122,7 +122,7 @@ The IAM export revealed a direct Owner assignment at the hidden resource group s
 
 2. Azure CLI – Examination of the Assignment
 
-The CLI output corroborated the Owner assignment and exposed additional details, including the principal ID and a condition restricting certain role-assignment operations. This provided further context about the permissions associated with the assignment.
+The CLI output corroborated the Owner assignment and exposed additional details, including the associated principal ID. This provided further information about the account holding the assignment.
 
 3. Resource Graph (KQL) – Principal Identification
 
@@ -145,4 +145,4 @@ The PIM export identified the assigned user and confirmed that the Owner assignm
 - Correlating evidence across multiple sources is necessary to establish the identity and permissions behind an assignment.
   
 ## Unexpected Findings
-While IAM, CLI, and Resource Graph enumerate active role assignments, they do not provide the same visibility into eligible assignments as PIM. As a result, privileges that can be activated when needed may remain overlooked during an audit.
+The IAM, CLI, and Resource Graph methods used in this audit focused on active role assignments and did not provide the same visibility into eligible assignments as PIM. As a result, privileges that can be activated when needed may remain overlooked during an audit.
