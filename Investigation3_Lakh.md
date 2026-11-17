@@ -1,5 +1,5 @@
 # Privilege Audit
-## Uncovering Excessive Privilege and the Blind Spots in Azure Access Auditing
+## Examining Azure Resource Access, Privilege Assignments, and RBAC Audit Methodologies
 _________________
 
 ## Scenario
