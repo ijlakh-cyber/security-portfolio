@@ -17,6 +17,17 @@ Scope: Assigned training tenant, including Azure resource role assignments acros
 ## Documentation & Redaction  
 Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
+## Methodology Comparison
+
+The following table provides an overview of the methods used throughout this audit, highlighting the information each provides and their respective limitations.
+
+| Method | What it provides | Limitations |
+|---|---|---|
+| **IAM blade / export** | Role assignments at a given scope, including inherited permissions | Group membership may not be immediately apparent; unresolved identities require further investigation |
+| **Azure CLI** | Assignment details, including principal IDs and unresolved principal names | Enumeration is performed at a specified scope; additional commands or scripting may be needed for broader reviews |
+| **Resource Graph (KQL)** | Queries role assignments across multiple accessible subscriptions | Results are subject to the auditor's permissions and available Resource Graph data |
+| **PIM export** | Active and eligible assignments, including activation requirements and assignment duration | Provides a view of PIM-managed assignments rather than a complete replacement for IAM or CLI |
+
 ## Audit Methodology
 
 ### Step 1: Access Control (IAM)
@@ -66,7 +77,7 @@ The methods thus far have assessed active role assignments, but have not conside
 
 Reviewing both role assignment types allows an auditor to identify privileges that may otherwise go unnoticed and assess whether they are appropriately assigned. PIM provides this additional layer of visibility. 
 
-### Step 5: The Hunt
+### Step 5: Combining these Methodologies
 
 This audit demonstrated the aforementioned methods together to examine least-privilege on a previously hidden resource group. The audit account first requested activation of its eligible role assignment. Activating this role expands the scope of resources accessible to the audit account (i.e. allows it to see the hidden resource group).
 
@@ -105,7 +116,6 @@ The most significant finding is that this user has permanent Owner access direct
 
 ## Findings and Investigation
 ## Summary of Findings
-## Methodology Comparison
 ## Recommendations
 ## Key Takeaways
 ## Unexpected Findings
