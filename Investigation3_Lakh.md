@@ -68,12 +68,10 @@ Reviewing both role assignment types allows an auditor to identify privileges th
 
 ### Step 5: The Hunt
 
-This audit will now apply the aforementioned methods together to examine a previously hidden resource group. The audit account first requests activation of its eligible role assignment through a designated group. Activating this role will expand the scope of resources accessible to the audit account.
+This audit will now apply the aforementioned methods together to examine a previously hidden resource group. The audit account first requests activation of its eligible role assignment. Activating this role will expand the scope of resources accessible to the audit account (i.e. allow it to see the hidden resource group).
 
 ![lab3-07](Screenshots/Lab3/lab3-07.png) 
 <sup><sub> **Figure 7: The audit account requests activation through PIM.** </sub></sup>
-
-The organisation had established the eligible group assignment for the audit account, allowing the activation request to proceed successfully, as shown below.
 
 ![lab3-08](Screenshots/Lab3/lab3-08.png) 
 <sup><sub> **Figure 8: The successful activation of a time-bound role assignment through PIM.** </sub></sup>
