@@ -61,7 +61,7 @@ The results available to the audit account remain restricted by its permissions,
 
 The methods thus far have assessed active role assignments, but have not considered eligible role assignments. This distinction can be explored using Privileged Identity Management (PIM). An active assignment grants the principal permission to use the role immediately, whereas an eligible assignment allows the principal to activate that role when required, subject to any configured activation requirements. This distinction is important because an audit of active assignments alone would overlook privileges that can be activated at a later time. Eligible assignments still represent authorised access to potentially sensitive resources, and should therefore be reviewed to establish whether the principal requires that level of access in the first place. 
 
-![lab3-05](Screenshots/Lab3/lab3-05.png) 
+![lab3-06](Screenshots/Lab3/lab3-06.png) 
 <sup><sub> **Figure 6: A PIM Assignments (Preview) export of an accessible resource group within the subscription. Highlighted is an eligible role assignment, which grants the principal the ability to activate the role for up to eight hours, after which the active assignment expires.** </sub></sup>
 
 ### Step 5: The Hunt
