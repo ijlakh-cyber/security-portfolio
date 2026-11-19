@@ -5,7 +5,7 @@ Documented cloud security investigations, built in a live Azure tenant
 
 Target role: Pen Tester
 Currently: Cybersecurity Consultant | Remote
-Contact: ij.sec@protonmail.com · linkedin.com/in/isaac-lakh-236372178
+Contact: ij.sec@protonmail.com · www.linkedin.com/in/isaaclakh
 
 ## Investigations
 | # | Title | Focus | Write-up |
