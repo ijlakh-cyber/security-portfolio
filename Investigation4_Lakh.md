@@ -16,7 +16,7 @@ Scope: func-intern-notify and its associated storage account, compared against t
 
 ## Documentation & Redaction
 
-[Explain screenshot censorship, removal of environment identifiers, and flag redaction.]
+Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
 
 ## Review Methodology
 
