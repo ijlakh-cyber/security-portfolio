@@ -20,13 +20,13 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ## Review Methodology
 
-[Explain the approach: comparing the intern's deployment against an existing production deployment to establish a working configuration baseline.]
+The review followed a baseline comparison approach, rather than working from a predefined list of deployment requirements. The intern's deployment was directly compared against a healthy production deployment, which served as a working configuration baseline. This provided a reference point for identifying differences in how the two deployments were configured and highlighted potential security or operational weaknesses.
 
-[Introduce the five review areas.]
+The review examined four areas of the deployment, focusing on regional placement, workload identity, storage security, and inbound network access. Any findings were then assessed to determine their potential impact and establish remediation priorities where necessary.
 
 ## The Deployment Review
 
-### Step 1: The Where — Regional Deployment
+### Step 1: The Where — Regional Placement
 
 [Investigation, evidence, finding and impact.]
 
@@ -42,7 +42,7 @@ Screenshots included in this report have been selectively censored to remove sen
 
 [Investigation, evidence, finding and impact.]
 
-### Step 5: The Call — Risk Prioritisation
+### Step 5: The Call — Risk Assessment
 
 [Identify the finding requiring immediate remediation.]
 
