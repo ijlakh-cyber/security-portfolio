@@ -1,110 +1,67 @@
 # The Friday Deploy
-## PLACEHOLDER
-_________________
+## Pre-Production Security Review of an Azure Function App
 
 ## Scenario
 
-The organisation, now wary following a recent security breach, has requested an audit of its Azure tenant to identify any violations of least-privilege that require remediation.
+[Introduce the deployment scenario and why the review was necessary.]
 
 ## Environment
+
 Platform: Microsoft Azure  
-Cloud environment: Live multi-user Azure training tenant  
-Services: Azure Resource Manager (RBAC), Microsoft Entra ID, Privileged Identity Management (PIM), Azure Resource Graph  
-Tools: Azure Portal, Azure CLI, Resource Graph Explorer (KQL), PIM  
-Access level: Reader (read-only), with one PIM-eligible Azure role  
-Scope: Assigned training tenant, including Azure resource role assignments across management groups, subscriptions, resource groups, and individual resources.  
+Services: Azure Functions, Azure Storage, Managed Identities, App Service Networking  
+Tools: Azure Portal  
+Access level: Reader (read-only)  
+Scope: func-intern-notify and its associated storage account, compared against the production compute baseline.
 
-## Documentation & Redaction  
-Screenshots included in this report have been selectively censored to remove sensitive environment identifiers and preserve the confidentiality of the training tenant. Lab flags and challenge-specific identifiers have also been redacted to maintain the integrity of the exercise and avoid disclosing solutions.
+## Documentation & Redaction
 
+[Explain screenshot censorship, removal of environment identifiers, and flag redaction.]
 
-## Methodology
+## Review Methodology
 
-[Explain how you approached the review.]
+[Explain the approach: comparing the intern's deployment against an existing production deployment to establish a working configuration baseline.]
 
-[Describe how you used the existing production deployment as a baseline, despite having no written configuration standard.]
+[Introduce the five review areas.]
 
-[Briefly explain the five areas examined.]
+## The Deployment Review
 
-## Findings
+### Step 1: The Where — Regional Deployment
 
-### The Where — Regional Deployment
+[Investigation, evidence, finding and impact.]
 
-**Observation:**  
-[What did you discover about the deployment's location?]
+### Step 2: The Who — Workload Identity
 
-**Evidence:**  
-[What configuration did you examine, and what did you compare it against?]
+[Investigation, evidence, finding and impact.]
 
-**Impact:**  
-[Why does this matter?]
+### Step 3: The Leak — Storage Exposure
 
-**Recommendation:**  
-[What should be changed?]
+[Investigation, evidence, verification and impact.]
 
-### The Who — Workload Identity
+### Step 4: The Door — Inbound Network Access
 
-**Observation:**  
-[What did you discover about the Function App's identity?]
+[Investigation, evidence, finding and impact.]
 
-**Evidence:**  
-[What did you find when comparing the intern's deployment against production?]
-
-**Impact:**  
-[What are the security implications?]
-
-**Recommendation:**  
-[What should be changed?]
-
-### The Leak — Storage Exposure
-
-**Observation:**  
-[What did you discover about the storage configuration?]
-
-**Evidence:**  
-[How did you verify the exposure?]
-
-**Impact:**  
-[What data could be accessed, and under what conditions?]
-
-**Recommendation:**  
-[What needs to be secured?]
-
-### The Door — Inbound Network Access
-
-**Observation:**  
-[What did you discover about inbound access restrictions?]
-
-**Evidence:**  
-[What did you find when comparing the Function Apps?]
-
-**Impact:**  
-[Why does this matter for the service?]
-
-**Recommendation:**  
-[What should be changed?]
-
-## The Call — Risk Prioritisation
+### Step 5: The Call — Risk Prioritisation
 
 [Identify the finding requiring immediate remediation.]
 
-[Explain why it takes priority over the other findings.]
+[Explain the reasoning behind prioritising active exposure over configuration hygiene and potential risks.]
 
-**Prioritisation principle:**  
-Exposure beats hygiene. Active beats potential.
+## Summary of Findings
 
-[Explain how you ranked the remaining findings and why.]
+[Consolidate the four findings, their significance, and their respective priorities.]
 
-## Recommendations and Remediation
+## Recommendations
 
-[List the actions required before production promotion.]
+- [Immediate remediation of the active exposure.]
+- [Workload identity and credential improvements.]
+- [Correct regional deployment.]
+- [Inbound network access restrictions.]
+- [Introduce a pre-production deployment checklist.]
 
-- [Immediate remediation]
-- [Identity and authentication improvements]
-- [Regional deployment correction]
-- [Inbound access restrictions]
-- [Additional deployment review/checklist]
+## Key Takeaways
 
-## Conclusion
-
-[Summarise the review, its outcome, and whether the deployment should be approved for production promotion.]
+- [Lessons about reviewing deployments against an established baseline.]
+- [Importance of verifying exposure rather than assuming it.]
+- [Risk prioritisation and proactive security reviews.]
+- [Cloud security considerations, including regional placement and egress costs.]
