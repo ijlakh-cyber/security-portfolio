@@ -28,7 +28,7 @@ Screenshots included in this report have been selectively censored to remove sen
 
 ## Findings
 
-### 3.1 The Where — Regional Deployment
+### The Where — Regional Deployment
 
 **Observation:**  
 [What did you discover about the deployment's location?]
@@ -42,7 +42,7 @@ Screenshots included in this report have been selectively censored to remove sen
 **Recommendation:**  
 [What should be changed?]
 
-### 3.2 The Who — Workload Identity
+### The Who — Workload Identity
 
 **Observation:**  
 [What did you discover about the Function App's identity?]
@@ -56,7 +56,7 @@ Screenshots included in this report have been selectively censored to remove sen
 **Recommendation:**  
 [What should be changed?]
 
-### 3.3 The Leak — Storage Exposure
+### The Leak — Storage Exposure
 
 **Observation:**  
 [What did you discover about the storage configuration?]
@@ -70,7 +70,7 @@ Screenshots included in this report have been selectively censored to remove sen
 **Recommendation:**  
 [What needs to be secured?]
 
-### 3.4 The Door — Inbound Network Access
+### The Door — Inbound Network Access
 
 **Observation:**  
 [What did you discover about inbound access restrictions?]
@@ -84,7 +84,7 @@ Screenshots included in this report have been selectively censored to remove sen
 **Recommendation:**  
 [What should be changed?]
 
-## 4. The Call — Risk Prioritisation
+## The Call — Risk Prioritisation
 
 [Identify the finding requiring immediate remediation.]
 
@@ -95,7 +95,7 @@ Exposure beats hygiene. Active beats potential.
 
 [Explain how you ranked the remaining findings and why.]
 
-## 5. Recommendations and Remediation
+## Recommendations and Remediation
 
 [List the actions required before production promotion.]
 
@@ -105,6 +105,6 @@ Exposure beats hygiene. Active beats potential.
 - [Inbound access restrictions]
 - [Additional deployment review/checklist]
 
-## 6. Conclusion
+## Conclusion
 
 [Summarise the review, its outcome, and whether the deployment should be approved for production promotion.]
