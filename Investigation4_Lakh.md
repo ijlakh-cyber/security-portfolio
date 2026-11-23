@@ -3,7 +3,7 @@
 
 ## Scenario
 
-[Introduce the deployment scenario and why the review was necessary.]
+An intern at the organisation, unfamiliar with deployment best practices, completed the deployment of a new notification service at the end-of-day Friday. Before the service is released to production, a senior engineer will review the deployment.
 
 ## Environment
 
