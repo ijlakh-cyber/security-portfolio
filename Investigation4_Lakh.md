@@ -8,7 +8,7 @@
 ## Environment
 
 Platform: Microsoft Azure  
-Cloud environment: Live multi-user Azure training tenant
+Cloud environment: Live multi-user Azure training tenant  
 Services: Azure Functions, Azure Storage, Managed Identities, App Service Networking  
 Tools: Azure Portal  
 Access level: Reader (read-only)  
