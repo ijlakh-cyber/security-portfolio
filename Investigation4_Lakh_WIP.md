@@ -61,7 +61,6 @@ The review examined four areas of the deployment, focusing on regional placement
 - [Introduce a pre-production deployment checklist.]
 
 ## Key Takeaways
-
 - [Lessons about reviewing deployments against an established baseline.]
 - [Importance of verifying exposure rather than assuming it.]
 - [Risk prioritisation and proactive security reviews.]
